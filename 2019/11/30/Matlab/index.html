@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="关于Matlab的学习笔记，以及与python的比较">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Matlab基础学习">
+<meta property="og:url" content="http://example.com/2019/11/30/Matlab/index.html">
+<meta property="og:site_name" content="Milo&#39;s Blog">
+<meta property="og:description" content="关于Matlab的学习笔记，以及与python的比较">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-30T08:55:36.000Z">
+<meta property="article:modified_time" content="2020-01-05T05:34:26.000Z">
+<meta property="article:author" content="Milo Ye">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2019/11/30/Matlab/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Matlab基础学习 | Milo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Milo's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%B8%B8%E7%94%A8%E5%85%B3%E9%94%AE%E5%AD%97"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 常用关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E7%89%B9%E6%AE%8A%E5%8F%98%E9%87%8F%E4%B8%8E%E5%B8%B8%E9%87%8F"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 特殊变量与常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-%E6%93%8D%E4%BD%9C"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%91%E9%87%8F"><span class="nav-number">2.</span> <span class="nav-text">2 向量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E7%9F%A9%E9%98%B5"><span class="nav-number">3.</span> <span class="nav-text">3 矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E8%8E%B7%E5%8F%96%E5%85%83%E7%B4%A0"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 获取元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%9F%A9%E9%98%B5%E6%93%8D%E4%BD%9C"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 矩阵操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 矩阵函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%87%BD%E6%95%B0%E4%B8%8E%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">4.</span> <span class="nav-text">4 函数与循环控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%87%BD%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%BE%AA%E7%8E%AF%E6%8E%A7%E5%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 循环控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-1-for"><span class="nav-number">4.2.1.</span> <span class="nav-text">4.2.1 for</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-2-while"><span class="nav-number">4.2.2.</span> <span class="nav-text">4.2.2 while</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-3-switch"><span class="nav-number">4.2.3.</span> <span class="nav-text">4.2.3 switch</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">5 常用函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 数学运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-mat2gray"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 mat2gray</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-norm"><span class="nav-number">5.3.</span> <span class="nav-text">5.3 norm</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-%E5%90%91%E9%87%8F%E8%8C%83%E6%95%B0"><span class="nav-number">5.3.1.</span> <span class="nav-text">5.3.1 向量范数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-%E7%9F%A9%E9%98%B5%E8%8C%83%E6%95%B0"><span class="nav-number">5.3.2.</span> <span class="nav-text">5.3.2 矩阵范数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-lyap"><span class="nav-number">5.4.</span> <span class="nav-text">5.4 lyap</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Milo Ye</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/11/30/Matlab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Milo Ye">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Milo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Matlab基础学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-30 16:55:36" itemprop="dateCreated datePublished" datetime="2019-11-30T16:55:36+08:00">2019-11-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-01-05 13:34:26" itemprop="dateModified" datetime="2020-01-05T13:34:26+08:00">2020-01-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Matlab/" itemprop="url" rel="index"><span itemprop="name">Matlab</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>关于Matlab的学习笔记，以及与python的比较</p>
+<a id="more"></a>
+
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><h3 id="1-1-输出格式"><a href="#1-1-输出格式" class="headerlink" title="1.1 输出格式"></a>1.1 输出格式</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 输出小数点后四位</span></span><br><span class="line">short（default）</span><br><span class="line"></span><br><span class="line">format long </span><br><span class="line">format short e </span><br><span class="line"></span><br><span class="line"><span class="comment">% 分数形式</span></span><br><span class="line">format <span class="built_in">rat</span> </span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-常用关键字"><a href="#1-2-常用关键字" class="headerlink" title="1.2 常用关键字"></a>1.2 常用关键字</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% 显示到目前为止所有变量名称 </span></span><br><span class="line">who </span><br><span class="line"></span><br><span class="line"><span class="comment">% 显示内存中的变量，类型，每个变量所分配的内存空间，以及它们是否是复数</span></span><br><span class="line">whos </span><br><span class="line"> </span><br><span class="line"><span class="comment">%clear command window</span></span><br><span class="line">clc</span><br><span class="line"><span class="comment">%清除全部变量</span></span><br><span class="line">clear  </span><br><span class="line"><span class="comment">% 清除特定变量，则在 clear 后面带上变量名列表 </span></span><br><span class="line">clear x </span><br><span class="line"></span><br><span class="line">行尾 …   相当于python中的 \</span><br><span class="line"></span><br><span class="line">help <span class="function"><span class="keyword">function</span></span></span><br><span class="line">doc <span class="function"><span class="keyword">function</span></span></span><br><span class="line">edit <span class="function"><span class="keyword">function</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 用来判断输入变量个数的函数</span></span><br><span class="line">nargin</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">y</span>=<span class="title">Untitled2</span><span class="params">(a,b)</span></span></span><br><span class="line">    <span class="keyword">if</span> nargin==<span class="number">0</span></span><br><span class="line">    	a=<span class="number">0</span>;b=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">elseif</span> nargin==<span class="number">1</span></span><br><span class="line">    	b=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    	y=a+b;</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-特殊变量与常量"><a href="#1-3-特殊变量与常量" class="headerlink" title="1.3 特殊变量与常量"></a>1.3 特殊变量与常量</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ans</span></span><br><span class="line"><span class="built_in">i</span>, <span class="built_in">j</span>: <span class="built_in">complex</span> number 复数</span><br><span class="line">Inf: 无穷</span><br><span class="line"><span class="built_in">eps</span>: <span class="number">2.2204e-016</span></span><br><span class="line">NaN： not a number</span><br><span class="line"><span class="keyword">end</span>: 最后一个元素</span><br><span class="line"><span class="built_in">pi</span>:  圆周率</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-文件"><a href="#1-4-文件" class="headerlink" title="1.4 文件"></a>1.4 文件</h3><ul>
+<li><p><strong>脚本文件</strong> 以.m 为扩展名</p>
+</li>
+<li><p><strong>命令行文件</strong>以 .mat 为扩展名</p>
+</li>
+<li><p>可以在命令窗口中输入脚本文件名来访问(在同一文件夹下)</p>
+</li>
+</ul>
+<h3 id="1-5-操作"><a href="#1-5-操作" class="headerlink" title="1.5 操作"></a>1.5 操作</h3><ul>
+<li><strong>终止程序</strong>：点击命令窗口，ctrl+c </li>
+</ul>
+<h2 id="2-向量"><a href="#2-向量" class="headerlink" title="2 向量"></a>2 向量</h2><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% ; 表示换行</span></span><br><span class="line"><span class="comment">% 列向量 ; 为分隔符</span></span><br><span class="line">a = [<span class="number">2</span>; <span class="number">1</span>; <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% 行向量 (,)或（ ）为分隔符 </span></span><br><span class="line">v = [<span class="number">2</span> <span class="number">0</span> <span class="number">4</span>], v = [<span class="number">2</span>, <span class="number">0</span>, <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">% 转置　 (&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% []  用于矩阵，向量，元素，字符的拼接</span></span><br><span class="line"><span class="comment">% np.vstack</span></span><br><span class="line">C = [A; B]</span><br><span class="line"><span class="comment">% np.hstack</span></span><br><span class="line">C = [A, B] </span><br><span class="line"></span><br><span class="line"><span class="comment">% np.arange(xi, xe, q)</span></span><br><span class="line">x = [xi : q: xe]  </span><br><span class="line"></span><br><span class="line"><span class="comment">% 向量的乘方必须在幂运算符前（ ^）前加上点号（ .） </span></span><br><span class="line"><span class="comment">% 点号表示对向量或矩阵中的每一个元素进行操作</span></span><br><span class="line">y = x.^<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 返回向量中包含元素的个数 </span></span><br><span class="line"><span class="built_in">length</span>() </span><br><span class="line"></span><br><span class="line"><span class="comment">% a、 b 两向量的点乘</span></span><br><span class="line"><span class="built_in">dot</span>(a, b) </span><br><span class="line">a&#x27;*b</span><br><span class="line"></span><br><span class="line"><span class="comment">%向量的叉乘，这两个向量必须是的三维  </span></span><br><span class="line"><span class="built_in">cross</span>(a,b)</span><br><span class="line"></span><br><span class="line"><span class="comment">% 向量中的元素可以通过下标进行访问和修改（i = 1, 2, ..., length(A)）</span></span><br><span class="line"></span><br><span class="line">A = [<span class="number">1</span>; <span class="number">2</span>; <span class="number">3</span>; <span class="number">4</span>; <span class="number">5</span>]</span><br><span class="line"><span class="comment">% 向量的复制 A[:]  </span></span><br><span class="line">A(:) </span><br><span class="line"><span class="comment">% A[2: 5]</span></span><br><span class="line">A(<span class="number">2</span>: <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-矩阵"><a href="#3-矩阵" class="headerlink" title="3 矩阵"></a>3 矩阵</h2><h3 id="3-1-获取元素"><a href="#3-1-获取元素" class="headerlink" title="3.1 获取元素"></a>3.1 获取元素</h3><ul>
+<li><p>matlab中索引从1开始，而numpy中从0开始</p>
+</li>
+<li><p>索引先列后行，如下</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">E = [<span class="number">1</span>,<span class="number">2</span>;<span class="number">3</span>,<span class="number">4</span>;<span class="number">5</span>,<span class="number">6</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">%按列求和(得到一个行向量）</span></span><br><span class="line">a = sum(E)</span><br><span class="line">a = sum(E,<span class="number">1</span>)</span><br><span class="line"><span class="comment">% a =</span></span><br><span class="line"><span class="comment">%     9    12</span></span><br><span class="line"></span><br><span class="line"><span class="comment">%按行求和(得到一个列向量）</span></span><br><span class="line">a = sum(E,<span class="number">2</span>)</span><br><span class="line"><span class="comment">%ans =</span></span><br><span class="line"><span class="comment">%     3</span></span><br><span class="line"><span class="comment">%     7</span></span><br><span class="line"><span class="comment">%    11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% a=sum(x(:));%对整个矩阵求和</span></span><br><span class="line">a = sum(sum(E))</span><br><span class="line">a = sum(E(:))</span><br><span class="line"><span class="comment">% a =</span></span><br><span class="line"><span class="comment">%     21</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">max</span>(E)</span><br><span class="line"><span class="comment">% ans =</span></span><br><span class="line"><span class="comment">%     5     6</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>1</th>
+<th>4</th>
+<th>7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2</td>
+<td>5</td>
+<td>8</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>9</td>
+</tr>
+</tbody></table>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% []  用于矩阵，向量，元素，字符的拼接</span></span><br><span class="line"><span class="comment">% A(行[]， 列[])</span></span><br><span class="line"></span><br><span class="line">A(<span class="number">2</span>)</span><br><span class="line"><span class="comment">% ２</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% A([2, 2]) = A([2 2]) = [A(2), A(2)]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% A([1, 3], [1, 3]) = 第一， 三行 并 第一， 三列 = </span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 获取第二行，第三列的数值</span></span><br><span class="line">A(<span class="number">2</span>, <span class="number">3</span>) </span><br><span class="line"><span class="comment">% 所有行，第二列</span></span><br><span class="line">A(:, <span class="number">2</span>)</span><br><span class="line"><span class="comment">% 所有行，第二，三列，</span></span><br><span class="line">A(:, <span class="number">2</span>:<span class="number">3</span>) </span><br><span class="line"><span class="comment">% 1到10行，第一列</span></span><br><span class="line">A(<span class="number">1</span>:<span class="number">10</span>, <span class="number">1</span>)</span><br><span class="line"><span class="comment">% 访问矩阵中的第i行，第j列, i,j 可为[], : ()</span></span><br><span class="line">A(<span class="built_in">i</span>, <span class="built_in">j</span>) </span><br><span class="line"><span class="comment">% 删除第二行</span></span><br><span class="line">A(<span class="number">2</span>, :) =[]  </span><br><span class="line"></span><br><span class="line"><span class="comment">% A = np.array([[-1, 6], [7, 11]])</span></span><br><span class="line">A = [<span class="number">-1</span>, <span class="number">6</span>; <span class="number">7</span>, <span class="number">11</span>] </span><br><span class="line">A = [<span class="number">-1</span> <span class="number">6</span>; <span class="number">7</span> <span class="number">11</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-矩阵操作"><a href="#3-2-矩阵操作" class="headerlink" title="3.2 矩阵操作"></a>3.2 矩阵操作</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">det(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% 方程组求解 Ax = b</span></span><br><span class="line">x = b/A </span><br><span class="line"></span><br><span class="line"><span class="comment">% 等价于</span></span><br><span class="line">x = A\b </span><br><span class="line"></span><br><span class="line"><span class="comment">% 等价于</span></span><br><span class="line">x = A^(<span class="number">-1</span>) * b </span><br><span class="line"></span><br><span class="line"><span class="comment">% 等价于</span></span><br><span class="line">inv(A)*b</span><br><span class="line"></span><br><span class="line"><span class="comment">% 矩阵求逆</span></span><br><span class="line">inv(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% &quot; . &quot; 对矩阵中的每一个元素进行对应的操作</span></span><br><span class="line"><span class="comment">% 数组相乘，对应元素相乘</span></span><br><span class="line">A.*B  </span><br><span class="line"></span><br><span class="line"><span class="comment">% 矩阵相乘 </span></span><br><span class="line">A*B</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-矩阵函数"><a href="#3-3-矩阵函数" class="headerlink" title="3.3 矩阵函数"></a>3.3 矩阵函数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">zeros</span>(r, c)</span><br><span class="line"><span class="built_in">eye</span>(n)</span><br><span class="line">rank(A)</span><br><span class="line"></span><br><span class="line"><span class="comment">% 将矩阵A的行数返回到第一个变量r，将矩阵的列数返回到第二个变量c</span></span><br><span class="line">[r,c] = <span class="built_in">size</span>(A)</span><br><span class="line">r = <span class="built_in">size</span>(A,<span class="number">1</span>)  <span class="comment">% 返回行数</span></span><br><span class="line">c = <span class="built_in">size</span>(A,<span class="number">2</span>)  <span class="comment">% 返回列数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">% 将矩阵A复制m×n块，即把A作为B的元素，B由m×n个A平铺而成。</span></span><br><span class="line">B = <span class="built_in">repmat</span>(A,m,n)</span><br><span class="line"></span><br><span class="line"><span class="comment">% 求矩阵A的全部特征值，构成向量E。</span></span><br><span class="line">E=eig(A)</span><br><span class="line"><span class="comment">% 求矩阵A的全部特征值，构成对角阵D，并求A的特征向量构成V的列向量。</span></span><br><span class="line">[V,D]=eig(A)</span><br><span class="line"></span><br><span class="line">[U,S,V] = svd(A)</span><br><span class="line">[U,S,V] = svd(A, <span class="string">&#x27;econ&#x27;</span>) economic <span class="built_in">size</span>，相当于把多余的部分去除掉了</span><br><span class="line"></span><br><span class="line">[L, U] = lu(A) </span><br><span class="line">n = norm(v)  返回矢量 v 的 <span class="number">2</span> 范数或欧几里得范数</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-函数与循环控制"><a href="#4-函数与循环控制" class="headerlink" title="4 函数与循环控制"></a>4 函数与循环控制</h2><h3 id="4-1-函数"><a href="#4-1-函数" class="headerlink" title="4.1 函数"></a>4.1 函数</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% function 用来返回数据的变量名 = 函数名和用来传给数据的参数 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ave</span> = <span class="title">myaverage</span><span class="params">(x, N)</span></span></span><br><span class="line">sizex = <span class="built_in">size</span>(x);</span><br><span class="line">sizeN = <span class="built_in">size</span>(N);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> sizex(<span class="number">2</span>) ~= sizeN(<span class="number">2</span>)</span><br><span class="line">    <span class="built_in">disp</span>(<span class="string">&#x27;错误：数据必须具有相同的维数。 &#x27;</span>)</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    total = sum(N);</span><br><span class="line">    s = x.*N;</span><br><span class="line">    ave = sum(s)/total; </span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-循环控制"><a href="#4-2-循环控制" class="headerlink" title="4.2 循环控制"></a>4.2 循环控制</h3><h4 id="4-2-1-for"><a href="#4-2-1-for" class="headerlink" title="4.2.1 for"></a>4.2.1 for</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> index = start : [increment] : finish</span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumx</span> = <span class="title">mysum</span><span class="params">(x)</span></span></span><br><span class="line">num = <span class="built_in">size</span>(x);</span><br><span class="line">sumx = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:num(<span class="number">2</span>)</span><br><span class="line">    sumx = sumx + x(<span class="built_in">i</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-2-while"><a href="#4-2-2-while" class="headerlink" title="4.2.2 while"></a>4.2.2 while</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> condition</span><br><span class="line">	statements</span><br><span class="line"><span class="keyword">end</span> </span><br><span class="line"></span><br><span class="line">n = input(<span class="string">&#x27;输入求和的个数： &#x27;</span>)</span><br><span class="line"><span class="built_in">i</span> = <span class="number">1</span>;</span><br><span class="line">sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span> <span class="built_in">i</span> &lt;= n;</span><br><span class="line">    sum = sum + <span class="number">1</span>/<span class="built_in">i</span>;</span><br><span class="line">    <span class="built_in">i</span> = <span class="built_in">i</span> + <span class="number">1</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="built_in">disp</span>(<span class="string">&#x27;总和为： &#x27;</span>);<span class="built_in">disp</span>(sum)</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-2-3-switch"><a href="#4-2-3-switch" class="headerlink" title="4.2.3 switch"></a>4.2.3 switch</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> expression</span><br><span class="line">	<span class="keyword">case</span> <span class="number">1</span></span><br><span class="line">		do these statements</span><br><span class="line">	<span class="keyword">case</span> <span class="number">2</span></span><br><span class="line">		do these statements</span><br><span class="line">	<span class="keyword">case</span> n</span><br><span class="line">		do these statements</span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span> </span><br></pre></td></tr></table></figure>
+
+<h2 id="5-常用函数"><a href="#5-常用函数" class="headerlink" title="5 常用函数"></a>5 常用函数</h2><h3 id="5-1-数学运算"><a href="#5-1-数学运算" class="headerlink" title="5.1 数学运算"></a>5.1 数学运算</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exp</span>()</span><br><span class="line"><span class="built_in">sqrt</span>()</span><br><span class="line"><span class="built_in">log</span>()</span><br><span class="line"><span class="built_in">log10</span>()</span><br><span class="line"><span class="built_in">cos</span>(<span class="built_in">pi</span>) 以弧度为参数</span><br><span class="line"><span class="built_in">acos</span>(<span class="number">-1</span>) </span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-mat2gray"><a href="#5-2-mat2gray" class="headerlink" title="5.2 mat2gray"></a>5.2 mat2gray</h3><p>使用下面的公式对矩阵进行归一化<br>$$<br>x= \frac{x-min}{max-min}<br>$$</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; test = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>; <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"></span><br><span class="line">test =</span><br><span class="line"></span><br><span class="line">     <span class="number">1</span>     <span class="number">2</span>     <span class="number">3</span></span><br><span class="line">     <span class="number">4</span>     <span class="number">5</span>     <span class="number">6</span></span><br><span class="line"></span><br><span class="line">&gt;&gt; test2 = mat2gray(test)</span><br><span class="line"></span><br><span class="line">test2 =</span><br><span class="line"></span><br><span class="line">         <span class="number">0</span>    <span class="number">0.2000</span>    <span class="number">0.4000</span></span><br><span class="line">    <span class="number">0.6000</span>    <span class="number">0.8000</span>    <span class="number">1.0000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-3-norm"><a href="#5-3-norm" class="headerlink" title="5.3 norm"></a>5.3 norm</h3><h4 id="5-3-1-向量范数"><a href="#5-3-1-向量范数" class="headerlink" title="5.3.1 向量范数"></a>5.3.1 向量范数</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">NORM(V,P) = sum(<span class="built_in">abs</span>(V).^P)^(<span class="number">1</span>/P).</span><br><span class="line">NORM(V) = norm(V,<span class="number">2</span>).</span><br><span class="line">NORM(V,<span class="built_in">inf</span>) = <span class="built_in">max</span>(<span class="built_in">abs</span>(V)).</span><br><span class="line">NORM(V,-<span class="built_in">inf</span>) = <span class="built_in">min</span>(<span class="built_in">abs</span>(V)).</span><br><span class="line"></span><br><span class="line"><span class="comment">% normalizes the rows of M to a length of 1</span></span><br><span class="line">n = normr(M)  </span><br></pre></td></tr></table></figure>
+
+<h4 id="5-3-2-矩阵范数"><a href="#5-3-2-矩阵范数" class="headerlink" title="5.3.2 矩阵范数"></a>5.3.2 矩阵范数</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NORM(X) is the largest singular value of X, <span class="built_in">max</span>(svd(X)).</span><br><span class="line">NORM(X,<span class="number">2</span>) is the same as NORM(X).</span><br><span class="line"></span><br><span class="line">NORM(X,<span class="number">1</span>) is the <span class="number">1</span>-norm of X, the largest column sum,= <span class="built_in">max</span>(sum(<span class="built_in">abs</span>(X))).</span><br><span class="line">NORM(X,<span class="built_in">inf</span>) is the infinity norm of X, the largest row sum,= <span class="built_in">max</span>(sum(<span class="built_in">abs</span>(X&#x27;))).</span><br><span class="line"></span><br><span class="line">NORM(X,<span class="string">&#x27;fro&#x27;</span>) is the Frobenius norm, <span class="built_in">sqrt</span>(sum(<span class="built_in">diag</span>(X&#x27;*X))).</span><br><span class="line">NORM(X,P) is available <span class="keyword">for</span> matrix X only <span class="keyword">if</span> P is <span class="number">1</span>, <span class="number">2</span>, <span class="built_in">inf</span> or <span class="string">&#x27;fro&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-4-lyap"><a href="#5-4-lyap" class="headerlink" title="5.4 lyap"></a>5.4 lyap</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% AX+XB+C = 0</span></span><br><span class="line"></span><br><span class="line">X = lyap(A, B, C)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/25/Hexo/" rel="prev" title="Hexo">
+                  <i class="fa fa-chevron-left"></i> Hexo
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/12/18/Derivatives/" rel="next" title="常用矩阵微分">
+                  常用矩阵微分 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Milo Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="​        Hexo常用命令和一些常用的插件安装以及YAML语法简介">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2019/11/25/Hexo/index.html">
+<meta property="og:site_name" content="Milo&#39;s Blog">
+<meta property="og:description" content="​        Hexo常用命令和一些常用的插件安装以及YAML语法简介">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/10/06/BDkpJ6ZyXxSIutY.png">
+<meta property="og:image" content="http://example.com/2019/11/25/Hexo/hexo/hijiki.png">
+<meta property="article:published_time" content="2019-11-25T05:14:40.000Z">
+<meta property="article:modified_time" content="2020-10-13T08:09:43.864Z">
+<meta property="article:author" content="Milo Ye">
+<meta property="article:tag" content="hexo">
+<meta property="article:tag" content="yaml">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/10/06/BDkpJ6ZyXxSIutY.png">
+
+
+<link rel="canonical" href="http://example.com/2019/11/25/Hexo/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Hexo | Milo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Milo's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo"><span class="nav-number">1.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Hexo"><span class="nav-number">1.1.</span> <span class="nav-text">1 Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1 常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.2  文件结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BD%91%E7%AB%99%E9%83%A8%E7%BD%B2"><span class="nav-number">1.2.</span> <span class="nav-text">2 网站部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 安装部署插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E9%83%A8%E7%BD%B2"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Aplayer"><span class="nav-number">1.3.</span> <span class="nav-text">3 Aplayer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85Aplayer%E6%8F%92%E4%BB%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 安装Aplayer插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%96%B0%E5%BB%BA%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2  新建页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">3.3 修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%A4%8D%E5%88%B6%E6%AD%8C%E5%8D%95%E7%9A%84%E9%93%BE%E6%8E%A5"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.4  复制歌单的链接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-hexo-helper-live2d"><span class="nav-number">1.4.</span> <span class="nav-text">4. hexo-helper-live2d</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6%E5%92%8C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 安装插件和模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 修改配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%BB%BA%E7%AB%8B%E6%96%87%E4%BB%B6"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3 建立文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E9%83%A8%E7%BD%B2"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87"><span class="nav-number">1.5.</span> <span class="nav-text">5 上传图片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YAML%E8%AF%AD%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">YAML语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">1 基本语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%9F%BA%E6%9C%AC%E8%A7%84%E5%88%99"><span class="nav-number">2.2.</span> <span class="nav-text">2 基本规则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">3 数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-scalar-%E7%BA%AF%E9%87%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 scalar 纯量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-map-%E6%95%A3%E5%88%97%E8%A1%A8"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 map 散列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-list-%E6%95%B0%E7%BB%84"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3 list 数组</span></a></li></ol></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Milo Ye</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2019/11/25/Hexo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Milo Ye">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Milo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Hexo
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-25 13:14:40" itemprop="dateCreated datePublished" datetime="2019-11-25T13:14:40+08:00">2019-11-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-13 16:09:43" itemprop="dateModified" datetime="2020-10-13T16:09:43+08:00">2020-10-13</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>​        Hexo常用命令和一些常用的插件安装以及YAML语法简介</p>
+<a id="more"></a>
+
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><p>​        Hexo 是一个快速、简洁且高效的博客框架。Hexo 使用 <a target="_blank" rel="noopener" href="http://daringfireball.net/projects/markdown/">Markdown</a>（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。 </p>
+<h2 id="1-Hexo"><a href="#1-Hexo" class="headerlink" title="1 Hexo"></a>1 Hexo</h2><h3 id="1-1-常用命令"><a href="#1-1-常用命令" class="headerlink" title="1.1 常用命令"></a>1.1 常用命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">hexo init [folder] </span><br><span class="line">&#x2F;&#x2F;初始化。[folder] 表示你要初始化的文件夹。如果你要初始化本地，直接 hexo init .</span><br><span class="line"></span><br><span class="line">hexo n [layout] &lt;title&gt; &#x3D;&#x3D; hexo new [layout] &lt;title&gt;</span><br><span class="line">&#x2F;&#x2F;新建文章或页面。[layout] 表示他的模板（i.e. post or page）</span><br><span class="line"></span><br><span class="line">hexo generate &#x3D;&#x3D; hexo g </span><br><span class="line">&#x2F;&#x2F;生成网站静态文件。生成后网页将会放在根目录下面的 public 文件夹里。</span><br><span class="line"></span><br><span class="line">hexo d &#x3D;&#x3D; hexo deploy </span><br><span class="line">&#x2F;&#x2F;部署网站。将会把生成好的页面（即 public 文件夹里的内容）部署到指定的地方上。需要安装部署插件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hexo clean</span><br><span class="line">&#x2F;&#x2F; 清空 public 文件夹</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-文件结构"><a href="#1-2-文件结构" class="headerlink" title="1.2  文件结构"></a>1.2  文件结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- node_modules &#x2F;&#x2F;npm下载的文件在这，存放项目依赖</span><br><span class="line">- public &#x2F;&#x2F; 发布的网站内容，网站的根目录</span><br><span class="line">- scaffolds &#x2F;&#x2F; draft,page,post的front-matter模板文件,hexo n [layout] &lt;title&gt;引用该文件的front-matter</span><br><span class="line">- source &#x2F;&#x2F; 存放要发布的文章（post），页面（tages， categories）</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-网站部署"><a href="#2-网站部署" class="headerlink" title="2 网站部署"></a>2 网站部署</h2><h3 id="2-1-安装部署插件"><a href="#2-1-安装部署插件" class="headerlink" title="2.1 安装部署插件"></a>2.1 安装部署插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br><span class="line">npm install hexo-server --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-修改配置文件"><a href="#2-2-修改配置文件" class="headerlink" title="2.2 修改配置文件"></a>2.2 修改配置文件</h3><p>修改站点文件下的<code>_config.yml 文件_</code>，前提是已经有github的仓库，仓库名为<code>账户名.github.io</code></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:账户名/账户名.github.io.git</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-部署"><a href="#2-3-部署" class="headerlink" title="2.3 部署"></a>2.3 部署</h3><p>在站点下打开cmd窗口</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Aplayer"><a href="#3-Aplayer" class="headerlink" title="3 Aplayer"></a>3 Aplayer</h2><p>多媒体播放软件</p>
+<h3 id="3-1-安装Aplayer插件"><a href="#3-1-安装Aplayer插件" class="headerlink" title="3.1 安装Aplayer插件"></a>3.1 安装Aplayer插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;安装Aplayer插件</span><br><span class="line">npm install hexo-tag-aplayer --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-新建页面"><a href="#3-2-新建页面" class="headerlink" title="3.2  新建页面"></a>3.2  新建页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page playlist</span><br></pre></td></tr></table></figure>
+
+<p>在 /source 文件夹下会生成一个playlist文件夹，文件夹中有index.md，i.e. 新建的playlist页面 。打开index.md，修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">title: playlist</span><br><span class="line">date: 2019-11-23 21:17:17</span><br><span class="line">type: &quot;playlist&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-修改配置文件"><a href="#3-3-修改配置文件" class="headerlink" title="3.3 修改配置文件"></a>3.3 修改配置文件</h3><p>打开主题的 _config.yml文件，在menu下新建一个名为playlist的类（注意这里使用的图标是图标库中的图标，网址为 <a target="_blank" rel="noopener" href="http://www.fontawesome.com.cn/faicons/">http://www.fontawesome.com.cn/faicons/</a> 。可以选择自己喜欢的图标，我这里选择的是music）。完成后如下所示： </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="attr">playlist:</span> <span class="string">/playlist/</span> <span class="string">||</span> <span class="string">music</span></span><br></pre></td></tr></table></figure>
+
+<p>打开站点的 _config.yml文件，添加如下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">aplayer:</span><br><span class="line">  meting: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-复制歌单的链接"><a href="#3-4-复制歌单的链接" class="headerlink" title="3.4  复制歌单的链接"></a>3.4  复制歌单的链接</h3><p>复制歌单的id，如 <a target="_blank" rel="noopener" href="https://music.163.com/#/my/m/music/playlist?id=3089298712%E3%80%82id%E4%B8%BA3089298712%E3%80%82%E5%9C%A8/source/playlist/index.md%E6%96%87%E4%BB%B6%EF%BC%8C%E8%BE%93%E5%85%A5%EF%BC%9A">https://music.163.com/#/my/m/music/playlist?id=3089298712。id为3089298712。在/source/playlist/index.md文件，输入：</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% meting &quot;3089298712&quot; &quot;netease&quot; &quot;playlist&quot; &quot;theme:#FF4081&quot; &quot;mode:circulation&quot; &quot;mutex:true&quot; &quot;listmaxheight:340px&quot; &quot;preload:auto&quot; %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果图如下：</p>
+<p><img src="https://i.loli.net/2020/10/06/BDkpJ6ZyXxSIutY.png" alt="Aplayer.png"></p>
+<h2 id="4-hexo-helper-live2d"><a href="#4-hexo-helper-live2d" class="headerlink" title="4. hexo-helper-live2d"></a>4. hexo-helper-live2d</h2><p>在网页中添加可爱模型</p>
+<h3 id="4-1-安装插件和模型"><a href="#4-1-安装插件和模型" class="headerlink" title="4.1 安装插件和模型"></a>4.1 安装插件和模型</h3><p>模型见 <a target="_blank" rel="noopener" href="https://github.com/xiazeyu/live2d-widget-models">https://github.com/xiazeyu/live2d-widget-models</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-helper-live2d</span><br><span class="line"></span><br><span class="line">npm install --save live2d-widget-model-&lt;你喜欢的模型名字&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-修改配置文件"><a href="#4-2-修改配置文件" class="headerlink" title="4.2 修改配置文件"></a>4.2 修改配置文件</h3><p>打开主题或站点的 _config.yml文件，添加以下内容</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">live2d:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">scriptFrom:</span> <span class="string">local</span></span><br><span class="line">  <span class="attr">pluginRootPath:</span> <span class="string">live2dw/</span></span><br><span class="line">  <span class="attr">pluginJsPath:</span> <span class="string">lib/</span></span><br><span class="line">  <span class="attr">pluginModelPath:</span> <span class="string">assets/</span></span><br><span class="line">  <span class="attr">tagMode:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">debug:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">model:</span></span><br><span class="line">    <span class="attr">use:</span> <span class="string">live2d-widget-model-&lt;你喜欢的模型名字&gt;</span></span><br><span class="line">  <span class="attr">display:</span></span><br><span class="line">    <span class="attr">position:</span> <span class="string">right</span></span><br><span class="line">    <span class="attr">width:</span> <span class="number">150</span></span><br><span class="line">    <span class="attr">height:</span> <span class="number">300</span></span><br><span class="line">  <span class="attr">mobile:</span></span><br><span class="line">    <span class="attr">show:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">react:</span></span><br><span class="line">    <span class="attr">opacity:</span> <span class="number">0.8</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-建立文件"><a href="#4-3-建立文件" class="headerlink" title="4.3 建立文件"></a>4.3 建立文件</h3><ol>
+<li>在站点目录下建文件夹<code>live2d_models</code> </li>
+<li>再在<code>live2d_models</code>下建文件夹<code>&lt;你喜欢的模型名字&gt;</code></li>
+<li>再在<code>&lt;你喜欢的模型名字&gt;</code>下建json文件：<code>&lt;你喜欢的模型名字&gt;.model.json </code></li>
+</ol>
+<h3 id="4-4-部署"><a href="#4-4-部署" class="headerlink" title="4.4 部署"></a>4.4 部署</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<p>效果图如下（模型为hijiki）：</p>
+<p><img src="/2019/11/25/Hexo/hexo/hijiki.png"></p>
+<h2 id="5-上传图片"><a href="#5-上传图片" class="headerlink" title="5 上传图片"></a>5 上传图片</h2><p>在<code>source</code>文件夹下创建<code>imgs</code>文件夹，再根据文章发表日子创建文件夹，如<code>191125</code>,将图片存放在该文件夹中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-source</span><br><span class="line">  ├--imgs</span><br><span class="line">  |   └--191125</span><br><span class="line">  |       └--hijiki.png</span><br><span class="line">  ├--_posts</span><br></pre></td></tr></table></figure>
+
+<p>再在文章中引用该图片</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片未正常引用时的提示语](&#x2F;imgs&#x2F;hexo&#x2F;hijiki.png)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h1 id="YAML语法"><a href="#YAML语法" class="headerlink" title="YAML语法"></a>YAML语法</h1><p> 在 Hexo 中写文档，通常需要在头部写一些关于文章的信息(<code>Front-matter</code>)，这些都是需要使用 YAML 语言来写的，例如 </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以---开始和结束的，而且，结束之后通常还要再有一行的空行，用以区分 Markdown 语法</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Git常用操作总结</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019-11-20 18:34:34</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line">	<span class="string">-git</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"></span><br><span class="line"><span class="string">Markdown...</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-基本语法"><a href="#1-基本语法" class="headerlink" title="1 基本语法"></a>1 基本语法</h2><p> YAML 使用键值对的形式记录信息 </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">key:</span> <span class="string">value</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-基本规则"><a href="#2-基本规则" class="headerlink" title="2 基本规则"></a>2 基本规则</h2><ol>
+<li>大小写敏感 </li>
+<li>使用缩进表示层级关系</li>
+<li>禁止使用 tab 缩进，只能使用空格键 </li>
+<li>缩进长度没有限制，只要元素对齐就表示这些元素属于一个层级 </li>
+<li>使用#表示注释 </li>
+<li>字符串可以不用引号标注（但是建议你最好还是加上引号） </li>
+</ol>
+<h2 id="3-数据结构"><a href="#3-数据结构" class="headerlink" title="3 数据结构"></a>3 数据结构</h2><h3 id="3-1-scalar-纯量"><a href="#3-1-scalar-纯量" class="headerlink" title="3.1 scalar 纯量"></a>3.1 scalar 纯量</h3><p> scalar 不可再分割的量 </p>
+<h3 id="3-2-map-散列表"><a href="#3-2-map-散列表" class="headerlink" title="3.2 map 散列表"></a>3.2 map 散列表</h3><p> 键值对的集合，只要是出于同于缩进级别下的键值对，都可以称为一个 map </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">highlight:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">line_number:</span> <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line">&#123;<span class="string">highlight:</span>&#123;<span class="attr">enable:</span> <span class="literal">true</span>, <span class="attr">line_number:</span> <span class="literal">true</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line"><span class="string">highlight:&#123;enable:</span> <span class="literal">true</span><span class="string">,</span> <span class="attr">line_number:</span> <span class="literal">true</span><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-list-数组"><a href="#3-3-list-数组" class="headerlink" title="3.3 list 数组"></a>3.3 list 数组</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">key:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">value1</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">value2</span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 等价于</span></span><br><span class="line"></span><br><span class="line"><span class="string">key:[value1,</span> <span class="string">value2]</span></span><br></pre></td></tr></table></figure>
+
+<p>map 和 list 可以相互嵌套使用</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/hexo/" rel="tag"># hexo</a>
+              <a href="/tags/yaml/" rel="tag"># yaml</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/11/23/JavaScriptDOM/" rel="prev" title="JavaScriptDOM">
+                  <i class="fa fa-chevron-left"></i> JavaScriptDOM
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/11/30/Matlab/" rel="next" title="Matlab基础学习">
+                  Matlab基础学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Milo Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
