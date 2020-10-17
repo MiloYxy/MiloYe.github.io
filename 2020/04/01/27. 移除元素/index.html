@@ -30,7 +30,7 @@
 <meta property="og:description" content="给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-04-01T02:51:32.000Z">
-<meta property="article:modified_time" content="2020-04-01T03:04:42.000Z">
+<meta property="article:modified_time" content="2020-10-15T02:15:36.550Z">
 <meta property="article:author" content="Milo Ye">
 <meta name="twitter:card" content="summary">
 
@@ -189,7 +189,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">60</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -202,7 +202,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">24</span>
+        <span class="site-state-item-count">25</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -265,10 +265,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-04-01 10:51:32 / Modified: 11:04:42" itemprop="dateCreated datePublished" datetime="2020-04-01T10:51:32+08:00">2020-04-01</time>
+      <time title="Created: 2020-04-01 10:51:32" itemprop="dateCreated datePublished" datetime="2020-04-01T10:51:32+08:00">2020-04-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-15 10:15:36" itemprop="dateModified" datetime="2020-10-15T10:15:36+08:00">2020-10-15</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -296,7 +302,8 @@
 
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>快慢指针+逆向思维</p>
 <p>i 慢指针， j 快指针（for 循环）</p>
-<p>if nums[j] != val</p>
+<p>if nums[j] != val：</p>
+<p>​    nums[i] = num[j]</p>
 <p>0-i 维护了一个指针窗口，构造新的array</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
