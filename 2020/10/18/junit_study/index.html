@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="JUnit是一个开源的Java语言的单元测试框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探JUnit">
+<meta property="og:url" content="http://example.com/2020/10/18/junit_study/index.html">
+<meta property="og:site_name" content="Milo&#39;s Blog">
+<meta property="og:description" content="JUnit是一个开源的Java语言的单元测试框架">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-18T03:13:32.000Z">
+<meta property="article:modified_time" content="2020-10-21T02:36:51.435Z">
+<meta property="article:author" content="Milo Ye">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/10/18/junit_study/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>初探JUnit | Milo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Milo's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1 简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.</span> <span class="nav-text">什么是单元测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit%E6%98%AF%E4%B8%80%E4%B8%AA%E5%BC%80%E6%BA%90%E7%9A%84Java%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E6%A1%86%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">JUnit是一个开源的Java语言的单元测试框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit%E7%9A%84%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.3.</span> <span class="nav-text">JUnit的设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Assert"><span class="nav-number">2.</span> <span class="nav-text">2 Assert</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8Assert%E6%96%AD%E8%A8%80"><span class="nav-number">2.1.</span> <span class="nav-text">使用Assert断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E4%B8%80%E4%B8%AA%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95%E5%86%85%E7%9A%84%E5%A4%9A%E4%B8%AA%E6%B5%8B%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">同一个单元测试内的多个测试方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Before%E5%92%8C-After"><span class="nav-number">3.</span> <span class="nav-text">3 @Before和@After</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-Before%E5%92%8C-After"><span class="nav-number">3.1.</span> <span class="nav-text">使用@Before和@After</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BeforeClass%E5%92%8C-AfterClass"><span class="nav-number">3.2.</span> <span class="nav-text">@BeforeClass和@AfterClass</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%84%E6%BA%90"><span class="nav-number">3.3.</span> <span class="nav-text">资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JUnit%E6%89%A7%E8%A1%8C%E9%80%BB%E8%BE%91"><span class="nav-number">3.4.</span> <span class="nav-text">JUnit执行逻辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">3.5.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="nav-number">4.</span> <span class="nav-text">4 异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93-1"><span class="nav-number">4.1.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%8F%82%E6%95%B0%E5%8C%96%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">5 参数化测试</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Milo Ye</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/18/junit_study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Milo Ye">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Milo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          初探JUnit
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-18 11:13:32" itemprop="dateCreated datePublished" datetime="2020-10-18T11:13:32+08:00">2020-10-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-21 10:36:51" itemprop="dateModified" datetime="2020-10-21T10:36:51+08:00">2020-10-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>JUnit是一个开源的Java语言的单元测试框架</p>
+<a id="more"></a>
+
+<h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1 简介"></a>1 简介</h2><h3 id="什么是单元测试"><a href="#什么是单元测试" class="headerlink" title="什么是单元测试"></a>什么是单元测试</h3><ul>
+<li>测试是针对最小的功能单元编写测试代码</li>
+<li>Java程序最小的功能单元是方法</li>
+<li>单元测试就是针对单个Java方法的测试</li>
+</ul>
+<h3 id="JUnit是一个开源的Java语言的单元测试框架"><a href="#JUnit是一个开源的Java语言的单元测试框架" class="headerlink" title="JUnit是一个开源的Java语言的单元测试框架"></a>JUnit是一个开源的Java语言的单元测试框架</h3><ul>
+<li>门针对Java语言设计，使用最广泛·</li>
+<li>JUnit是事实上的标准单元测试框架</li>
+<li>使用断言（Assertion）测试期望结果</li>
+<li>可以方便地组织和运行测试</li>
+<li>可以方便地查看测试结果</li>
+<li>常用IDE（例如Eclipse）都集成了JUnit</li>
+<li>可以方便地集成到Maven</li>
+</ul>
+<h3 id="JUnit的设计"><a href="#JUnit的设计" class="headerlink" title="JUnit的设计"></a>JUnit的设计</h3><ul>
+<li>TestCase：一个TestCase表示一个测试</li>
+<li>TestSuite：一个TestSuite包含一组TestCase，表示一组测试</li>
+<li>TestFixture：一个TestFixture表示一个测试环境</li>
+<li>TestResult：用于收集测试结果</li>
+<li>TestRunner：用于运行测试</li>
+<li>TestListener：用于监听测试过程，收集测试数据</li>
+<li>Assert：用于断言测试结果是否正确</li>
+</ul>
+<h2 id="2-Assert"><a href="#2-Assert" class="headerlink" title="2 Assert"></a>2 Assert</h2><h3 id="使用Assert断言"><a href="#使用Assert断言" class="headerlink" title="使用Assert断言"></a>使用Assert断言</h3><ul>
+<li>相等：assertEquals（100，x）</li>
+<li>断言数组相等：assertArrayEquals（{1，2，3}，x）</li>
+<li>浮点数断言相等：assertEquals（3.1416，x，0.0001）</li>
+<li>断言为nul:assertNull（x）</li>
+<li>断言为true/false:assertTrue（x&gt;0）assertFalse（x&lt;0）</li>
+<li>其他：assertNotEquals/assertNotNull</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertEquals;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Calculator</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">calculate</span><span class="params">(String expression)</span></span>&#123;</span><br><span class="line">        <span class="comment">// ?、+这些字符本身有逻辑含义，想表达这些字符的字面值就需要转义，即变成\?、\+</span></span><br><span class="line">        <span class="comment">// 为了保证送到正则编译器的表达式是上述字面值，代码中的字符串中必须存在\，对这个\转义需要另一个\</span></span><br><span class="line">        String[] ss = expression.split(<span class="string">&quot;\\+&quot;</span>);</span><br><span class="line">        System.out.println(expression + <span class="string">&quot; =&gt; &quot;</span> + Arrays.toString(ss));</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(String s : ss)&#123;</span><br><span class="line">            sum = sum + Integer.parseInt(s);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertEquals(<span class="number">6</span>, <span class="keyword">new</span> Calculator().calculate(<span class="string">&quot;1+2&quot;</span>));</span><br><span class="line">        assertEquals(<span class="number">3</span>, <span class="keyword">new</span> Calculator().calculate(<span class="string">&quot;1+2&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        assertEquals(<span class="number">3</span>, <span class="keyword">new</span> Calculator().calculate(<span class="string">&quot; 1+2&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//    public static void main(String[] args) &#123;</span></span><br><span class="line"><span class="comment">//        Calculator calculator = new Calculator();</span></span><br><span class="line"><span class="comment">//        int r = calculator.calculate(&quot;1+2+3&quot;);</span></span><br><span class="line"><span class="comment">//        System.out.println(r);</span></span><br><span class="line"><span class="comment">//    &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="同一个单元测试内的多个测试方法"><a href="#同一个单元测试内的多个测试方法" class="headerlink" title="同一个单元测试内的多个测试方法"></a>同一个单元测试内的多个测试方法</h3><ul>
+<li>测试前都需要初始化某些对象，在@Before 方法中初始化测试资源</li>
+<li>测试后可能需要清理资源 filelnputStream.close()，在@After方法中释放测试资源</li>
+</ul>
+<p>JUnit对于每个@Test方法：</p>
+<ol>
+<li>实例化Calculator Test</li>
+<li>执行@Before方法</li>
+<li>执行@Test方法</li>
+<li>执行@After方法</li>
+</ol>
+<h2 id="3-Before和-After"><a href="#3-Before和-After" class="headerlink" title="3 @Before和@After"></a>3 @Before和@After</h2><h3 id="使用-Before和-After"><a href="#使用-Before和-After" class="headerlink" title="使用@Before和@After"></a>使用@Before和@After</h3><ul>
+<li>单个@Test方法执行前会创建新的XxxTest实例，实例变量的状态不会传递给下一个@Test方法</li>
+<li>单个@Test方法执行前后会执行@Before和@Atfter方法</li>
+</ul>
+<h3 id="BeforeClass和-AfterClass"><a href="#BeforeClass和-AfterClass" class="headerlink" title="@BeforeClass和@AfterClass"></a>@BeforeClass和@AfterClass</h3><p>@BeforeClass和@AfterClass静态方法：</p>
+<ol>
+<li>在执行所有@Test方法前执行@BeforeClass静态方法</li>
+<li>执行所有测试</li>
+<li>在执行所有@Test方法后执行@AfterClass静态方法</li>
+</ol>
+<p>@BeforeClass和@AfterClass静态方法：</p>
+<ul>
+<li>@BeforeClass静态方法初始化的对象只能存放在静态字段中</li>
+<li>静态字段的状态会影响到所有@Test</li>
+</ul>
+<h3 id="资源"><a href="#资源" class="headerlink" title="资源"></a>资源</h3><p>初始化测试资源称为Fixture</p>
+<ul>
+<li>@Before：初始化测试对象，例如：input=new FilelnputStream（）；</li>
+<li>@After：销毁@Before创建的测试对象，例如：input.close（）；</li>
+<li>@BeforeClass：初始化非常耗时的资源，例如：创建数据库</li>
+<li>@AfterClass：清理@BeforeClass创建的资源，例如：删除数据库</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.assertEquals;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CalculatorTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    Calculator calc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span></span>&#123;</span><br><span class="line">        calc = <span class="keyword">new</span> Calculator();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r = calc.calculate(<span class="string">&quot;1+2&quot;</span>);</span><br><span class="line">        assertEquals(<span class="number">3</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> r = calc.calculate(<span class="string">&quot;1+2+3&quot;</span>);</span><br><span class="line">        assertEquals(<span class="number">6</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="JUnit执行逻辑"><a href="#JUnit执行逻辑" class="headerlink" title="JUnit执行逻辑"></a>JUnit执行逻辑</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">invokeBeforeClass(CalculatorTest.class); <span class="comment">// @BeforeClass</span></span><br><span class="line"><span class="keyword">for</span>(Method testMethod : finTestMethods(CalculatorTest.class))&#123;</span><br><span class="line">    CalculatorTest test = <span class="keyword">new</span> CalculatorTest(); <span class="comment">// new </span></span><br><span class="line">    test.setUp(); <span class="comment">// @Before</span></span><br><span class="line">    testMethod.invoke(test); <span class="comment">// @Test</span></span><br><span class="line">    test.tearDown(); <span class="comment">// @After</span></span><br><span class="line">&#125;</span><br><span class="line">invokeAfterClass(CalculatorTest.class); <span class="comment">// @AfterClass</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> sample;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SequenceTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@BeforeClass</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setUpBeforeClass</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;setUpBeforeClass()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@AfterClass</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">tearDownAfterClass</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;tearDownAfterClass()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;    setUp()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@After</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">tearDown</span><span class="params">()</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;   tearDown()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构造函数</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SequenceTest</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;new SequenceTest()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;    testA()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testB</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;    testB()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testC</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;    testC()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    setUpBeforeClass()</span></span><br><span class="line"><span class="comment">    new SequenceTest()</span></span><br><span class="line"><span class="comment">        setUp()</span></span><br><span class="line"><span class="comment">        testA()</span></span><br><span class="line"><span class="comment">       tearDown()</span></span><br><span class="line"><span class="comment">    new SequenceTest()</span></span><br><span class="line"><span class="comment">        setUp()</span></span><br><span class="line"><span class="comment">        testB()</span></span><br><span class="line"><span class="comment">       tearDown()</span></span><br><span class="line"><span class="comment">    new SequenceTest()</span></span><br><span class="line"><span class="comment">        setUp()</span></span><br><span class="line"><span class="comment">        testC()</span></span><br><span class="line"><span class="comment">       tearDown()</span></span><br><span class="line"><span class="comment">    tearDownAfterClass()</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>理解JUnit执行测试的生命周期</li>
+<li>@Before用于初始化测试对象，测试对象以实例变量存放</li>
+<li>@After用于清理@Before创建的对象</li>
+<li>@BeforeClass用于初始化耗时资源，以静态变量存放</li>
+<li>@AfterClass用于清理@BeforeClass创建的资源</li>
+</ul>
+<h2 id="4-异常处理"><a href="#4-异常处理" class="headerlink" title="4 异常处理"></a>4 异常处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test(expected = NumberFormatException.class)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">    calc.calculate(<span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//  =&gt; []</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Test(expected = NumberFormatException.class)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    calc.calculate(<span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//    java.lang.Exception: Unexpected exception, expected&lt;java.lang.NumberFormatException&gt; but was&lt;java.lang.NullPointerException&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>测试异常可以使用@Test（expected=Exception.class）</li>
+<li>对可能发生的每种类型的异常进行测试</li>
+</ul>
+<h2 id="5-参数化测试"><a href="#5-参数化测试" class="headerlink" title="5 参数化测试"></a>5 参数化测试</h2><p>如果待测试的输入和输出是一组数据：</p>
+<ul>
+<li>可以把测试数据组织起来</li>
+<li>用不同的测试数据调用相同的测试方法</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/17/11.%20%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" rel="prev" title="盛最多水的容器">
+                  <i class="fa fa-chevron-left"></i> 盛最多水的容器
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Milo Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
