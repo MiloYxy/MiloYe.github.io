@@ -30,7 +30,7 @@
 <meta property="og:description" content="接口侧重于扩展类的行为，该类有什么功能；而抽象类则是子类的抽象，侧重于类的定义，这个类是什么。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-10-24T08:17:03.000Z">
-<meta property="article:modified_time" content="2020-10-24T12:20:35.901Z">
+<meta property="article:modified_time" content="2020-10-25T08:37:35.031Z">
 <meta property="article:author" content="Milo Ye">
 <meta name="twitter:card" content="summary">
 
@@ -189,14 +189,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">66</span>
+          <span class="site-state-item-count">68</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -265,10 +265,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-10-24 16:17:03 / Modified: 20:20:35" itemprop="dateCreated datePublished" datetime="2020-10-24T16:17:03+08:00">2020-10-24</time>
+      <time title="Created: 2020-10-24 16:17:03" itemprop="dateCreated datePublished" datetime="2020-10-24T16:17:03+08:00">2020-10-24</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-10-25 16:37:35" itemprop="dateModified" datetime="2020-10-25T16:37:35+08:00">2020-10-25</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -294,14 +300,15 @@
 
 
 
-<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><ul>
+<h2 id="Interface"><a href="#Interface" class="headerlink" title="Interface"></a>Interface</h2><p>接口是常量（public final static）和抽象方法（public abstract）的集合，也可以有静态方法和默认方法</p>
+<ul>
 <li><p>访问修饰符一定为public，因为需要被实现</p>
 </li>
 <li><p>所有成员变量都默认是由public static final修饰</p>
 </li>
-<li><p>所有抽象方法都默认是由public abstract修饰的</p>
+<li><p>所有抽象方法都默认是由public abstract修饰的，无方法体</p>
 </li>
-<li><p>可以有static method 和 default method</p>
+<li><p>可以有static method 和 default method，必须要有方法体</p>
 <ul>
 <li>static method 可以通过 接口.方法名() 调用</li>
 <li>default method 需要子类来重写</li>
@@ -310,7 +317,7 @@
 <li><p>允许多继承</p>
 </li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> a=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">10</span>; <span class="comment">// 默认为 public final static</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String name)</span></span>; <span class="comment">//默认为 public abstract</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">isTen</span><span class="params">()</span></span>&#123; <span class="comment">// 默认为 public</span></span><br><span class="line">        <span class="keyword">return</span> b == <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> </span>&#123; <span class="comment">// 默认为 public</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">implements</span> <span class="title">IA</span></span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTen</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IA.hello(); <span class="comment">// hello</span></span><br><span class="line">        System.out.println(IA.b); <span class="comment">// 10</span></span><br><span class="line">        IA ia = <span class="keyword">new</span> B();</span><br><span class="line">        ia.isTen();</span><br><span class="line">        ia.say(<span class="string">&quot;milo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> test;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IA</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> a=<span class="number">10</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">10</span>; <span class="comment">// 默认为 public final static</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String name)</span></span>; <span class="comment">//默认为 public abstract</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// static修饰的方法必须要有方法体</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">isTen</span><span class="params">()</span></span>&#123; <span class="comment">// 默认为 public，</span></span><br><span class="line">        <span class="keyword">return</span> b == <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> </span>&#123; <span class="comment">// 默认为 public</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">implements</span> <span class="title">IA</span></span>&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">say</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">            System.out.println(name);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isTen</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        IA.hello(); <span class="comment">// hello</span></span><br><span class="line">        System.out.println(IA.b); <span class="comment">// 10</span></span><br><span class="line">        IA ia = <span class="keyword">new</span> B();</span><br><span class="line">        ia.isTen();</span><br><span class="line">        ia.say(<span class="string">&quot;milo&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="abstract-class"><a href="#abstract-class" class="headerlink" title="abstract class"></a>abstract class</h2><p>抽象类与普通类的唯一区别就是不能创建实例对象和允许有abstract方法。</p>
 <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><ol>
@@ -347,6 +354,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2020/10/25/%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" rel="next" title="执行顺序">
+                  执行顺序 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

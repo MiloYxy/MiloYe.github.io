@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"8.0.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="BatchFile的简单简绍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BatchFile">
+<meta property="og:url" content="http://example.com/2020/10/29/BatchFile/index.html">
+<meta property="og:site_name" content="Milo&#39;s Blog">
+<meta property="og:description" content="BatchFile的简单简绍">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-29T05:51:07.000Z">
+<meta property="article:modified_time" content="2020-10-29T05:52:07.526Z">
+<meta property="article:author" content="Milo Ye">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2020/10/29/BatchFile/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>BatchFile | Milo's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Milo's Blog</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E6%93%8D%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">运算操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97"><span class="nav-number">2.1.</span> <span class="nav-text">算术运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E8%BF%90%E7%AE%97"><span class="nav-number">2.2.</span> <span class="nav-text">重定向运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E5%91%BD%E4%BB%A4%E8%BF%90%E7%AE%97"><span class="nav-number">2.3.</span> <span class="nav-text">多命令运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%A1%E9%81%93%E7%AC%A6%E5%8F%B7"><span class="nav-number">2.4.</span> <span class="nav-text">管道符号</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%B9%E5%A4%84%E7%90%86%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">批处理基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.1.</span> <span class="nav-text">命令格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">3.2.</span> <span class="nav-text">参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E9%87%8A%E7%AC%A6"><span class="nav-number">3.3.</span> <span class="nav-text">注释符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%82%AB%E9%85%B7%E5%91%BD%E4%BB%A4"><span class="nav-number">3.4.</span> <span class="nav-text">炫酷命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%B6%E9%97%B4"><span class="nav-number">3.5.</span> <span class="nav-text">时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.6.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E7%94%A8%E5%85%B6%E4%BB%96bat%E6%96%87%E4%BB%B6"><span class="nav-number">3.7.</span> <span class="nav-text">调用其他bat文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8%E6%9F%A5%E7%9C%8B"><span class="nav-number">3.8.</span> <span class="nav-text">任务列表查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%85%B3%E9%97%AD"><span class="nav-number">3.9.</span> <span class="nav-text">任务关闭</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E7%BB%93%E6%9E%84%E6%9F%A5%E7%9C%8B"><span class="nav-number">3.10.</span> <span class="nav-text">文件夹结构查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E6%9C%BA"><span class="nav-number">3.11.</span> <span class="nav-text">关机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1"><span class="nav-number">3.12.</span> <span class="nav-text">计划任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">3.13.</span> <span class="nav-text">环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%A4%B9%E6%88%96%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">4.</span> <span class="nav-text">文件夹或文件相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E6%98%BE%E7%A4%BA"><span class="nav-number">4.1.</span> <span class="nav-text">目录显示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E5%88%9B%E5%BB%BA"><span class="nav-number">4.2.</span> <span class="nav-text">目录创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E5%88%A0%E9%99%A4"><span class="nav-number">4.3.</span> <span class="nav-text">目录删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E5%88%87%E6%8D%A2"><span class="nav-number">4.4.</span> <span class="nav-text">目录切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E9%87%8D%E5%91%BD%E5%90%8D"><span class="nav-number">4.5.</span> <span class="nav-text">目录重命名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E5%A4%8D%E5%88%B6"><span class="nav-number">4.6.</span> <span class="nav-text">目录复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%A0%E9%99%A4"><span class="nav-number">4.7.</span> <span class="nav-text">文件删除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%89%AA%E5%88%87"><span class="nav-number">4.8.</span> <span class="nav-text">文件剪切</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">网络相关命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%93%8D%E4%BD%9C"><span class="nav-number">5.1.</span> <span class="nav-text">用户操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E7%BB%84%E6%93%8D%E4%BD%9C"><span class="nav-number">5.2.</span> <span class="nav-text">用户组操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%81%94%E9%80%9A%E6%B5%8B%E8%AF%95"><span class="nav-number">5.3.</span> <span class="nav-text">网络联通测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%93%BE%E6%8E%A5"><span class="nav-number">5.4.</span> <span class="nav-text">网络链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="nav-number">5.5.</span> <span class="nav-text">路由信息查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-number">5.6.</span> <span class="nav-text">网络适配器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARP%E4%BF%A1%E6%81%AF"><span class="nav-number">5.7.</span> <span class="nav-text">ARP信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD%E7%BB%93%E6%9E%84"><span class="nav-number">6.</span> <span class="nav-text">条件判断结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if-else"><span class="nav-number">6.1.</span> <span class="nav-text">if-else</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8"><span class="nav-number">6.2.</span> <span class="nav-text">文件是否存在</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%88%A4%E6%96%AD%E5%88%A0%E9%99%A4"><span class="nav-number">6.3.</span> <span class="nav-text">文件判断删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="nav-number">7.</span> <span class="nav-text">循环结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E7%9B%AE%E5%BD%95"><span class="nav-number">7.1.</span> <span class="nav-text">遍历目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E5%88%A0%E9%99%A4%E6%96%87%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">遍历删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%95%B0%E5%AD%97"><span class="nav-number">7.3.</span> <span class="nav-text">遍历数字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9"><span class="nav-number">7.4.</span> <span class="nav-text">遍历文件内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E9%87%8D%E5%A4%8D%E6%96%B0%E5%BB%BA"><span class="nav-number">7.5.</span> <span class="nav-text">目录重复新建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%88%E4%BE%8B"><span class="nav-number">8.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E6%93%8D%E4%BD%9C"><span class="nav-number">8.1.</span> <span class="nav-text">交互操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bat%E8%BD%ACEXE%E7%A8%8B%E5%BA%8F"><span class="nav-number">8.2.</span> <span class="nav-text">Bat转EXE程序</span></a></li></ol></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Milo Ye</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">68</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/29/BatchFile/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Milo Ye">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Milo's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BatchFile
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2020-10-29 13:51:07 / Modified: 13:52:07" itemprop="dateCreated datePublished" datetime="2020-10-29T13:51:07+08:00">2020-10-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows/" itemprop="url" rel="index"><span itemprop="name">Windows</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>BatchFile的简单简绍</p>
+<a id="more"></a>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>windows 不区分大小写 <code>eCho</code> 等价于<code>echo</code></p>
+<p>\ 路径</p>
+<p>/ 参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">echo 输出</span><br><span class="line">@echo off 关闭盘符输出</span><br><span class="line">pause 暂停</span><br><span class="line">exit 退出当前操作，关闭batchfile</span><br><span class="line">%1   传参</span><br><span class="line">SET &#x2F;P variable&#x3D;[promptString]</span><br><span class="line">echo %path%  </span><br><span class="line"></span><br><span class="line">百分号在批处理文件用来表示命令行参数：%1，%2，...</span><br><span class="line">介于两个百分号之间的任何字符将被解释为变量</span><br><span class="line"></span><br><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;klchang&#x2F;p&#x2F;4771101.html</span><br></pre></td></tr></table></figure>
+
+<p>命令分类</p>
+<ul>
+<li>内部命令：ipconfig, cls</li>
+<li>外部命令：java, python</li>
+</ul>
+<h2 id="运算操作"><a href="#运算操作" class="headerlink" title="运算操作"></a>运算操作</h2><h3 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h3><p>arithmetic</p>
+<ul>
+<li><p>命令模式：<code>set /a </code> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Milo&gt;set &#x2F;a 1+3</span><br><span class="line">4</span><br><span class="line"></span><br><span class="line">set &#x2F;a var &#x3D; 1+2</span><br><span class="line">echo %var%</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文本模式</p>
+</li>
+</ul>
+<h3 id="重定向运算"><a href="#重定向运算" class="headerlink" title="重定向运算"></a>重定向运算</h3><ul>
+<li><p>&gt; 覆盖原有</p>
+</li>
+<li><p>&gt;&gt; 追加</p>
+</li>
+<li><p>type(打字)：文本内容查看</p>
+</li>
+<li><p>&lt;</p>
+</li>
+<li><p>&lt;&lt;</p>
+</li>
+<li><p>关系运算 </p>
+<ul>
+<li>&lt; 小于</li>
+<li>&gt; 大于</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理&gt;echo &quot;hello world&quot; &gt; a.txt</span><br><span class="line">F:\Desktop\批处理&gt;type a.txt</span><br><span class="line">&quot;hello world&quot;</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;echo &quot;hello world&quot; &gt;&gt; a.txt</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;type a.txt</span><br><span class="line">&quot;hello world&quot;</span><br><span class="line">&quot;hello world&quot;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="多命令运算"><a href="#多命令运算" class="headerlink" title="多命令运算"></a>多命令运算</h3><ul>
+<li>&amp;&amp; 具有短路，第一个命令错误不会执行第二个命令</li>
+<li>||</li>
+</ul>
+<h3 id="管道符号"><a href="#管道符号" class="headerlink" title="管道符号"></a>管道符号</h3><ul>
+<li>|  A|B     先执行A，在A的结果上执行B<ul>
+<li><code>dir | find &quot;.txt&quot;</code>  查找当前路径下的所有带有<code>.txt</code>的文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="批处理基本命令"><a href="#批处理基本命令" class="headerlink" title="批处理基本命令"></a>批处理基本命令</h2><h3 id="命令格式"><a href="#命令格式" class="headerlink" title="命令格式"></a>命令格式</h3><ul>
+<li><p><code>命令 子命令 参数 操作 选项</code></p>
+</li>
+<li><p><code>命令 /?</code>  命令帮助查看</p>
+</li>
+<li><p><code>命令 /help</code> 获取详细的帮助信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理&gt;net &#x2F;?</span><br><span class="line">此命令的语法是:</span><br><span class="line"></span><br><span class="line">NET</span><br><span class="line">    [ ACCOUNTS | COMPUTER | CONFIG | CONTINUE | FILE | GROUP | HELP |</span><br><span class="line">      HELPMSG | LOCALGROUP | PAUSE | SESSION | SHARE | START |</span><br><span class="line">      STATISTICS | STOP | TIME | USE | USER | VIEW ]</span><br><span class="line">      </span><br><span class="line">      </span><br><span class="line">F:\Desktop\批处理&gt;net  user &#x2F;?</span><br><span class="line">此命令的语法是:</span><br><span class="line"></span><br><span class="line">NET USER</span><br><span class="line">[username [password | *] [options]] [&#x2F;DOMAIN]</span><br><span class="line">         username &#123;password | *&#125; &#x2F;ADD [options] [&#x2F;DOMAIN]</span><br><span class="line">         username [&#x2F;DELETE] [&#x2F;DOMAIN]</span><br><span class="line">         username [&#x2F;TIMES:&#123;times | ALL&#125;]</span><br><span class="line">         username [&#x2F;ACTIVE: &#123;YES | NO&#125;]</span><br><span class="line">         </span><br><span class="line">         </span><br><span class="line">F:\Desktop\批处理&gt;net user test test &#x2F;add</span><br><span class="line">发生系统错误 5。</span><br><span class="line"></span><br><span class="line">拒绝访问。</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;net  user &#x2F;help</span><br><span class="line">此命令的语法是:</span><br><span class="line"></span><br><span class="line">NET USER</span><br><span class="line">[username [password | *] [options]] [&#x2F;DOMAIN]</span><br><span class="line">         username &#123;password | *&#125; &#x2F;ADD [options] [&#x2F;DOMAIN]</span><br><span class="line">         username [&#x2F;DELETE] [&#x2F;DOMAIN]</span><br><span class="line">         username [&#x2F;TIMES:&#123;times | ALL&#125;]</span><br><span class="line">         username [&#x2F;ACTIVE: &#123;YES | NO&#125;]</span><br><span class="line"></span><br><span class="line">NET USER 将创建并修改计算机上的用户帐户。在不使用命令开关的情况下，</span><br><span class="line">将列出计算机的用户帐户。用户帐户信息存储在用户帐户数据库中。</span><br><span class="line"></span><br><span class="line">username     为可添加、删除、修改或查看的用户帐户的名称。用户帐户名称</span><br><span class="line">             最多可以有 20 个字符。</span><br><span class="line">password     指定或更改用户帐户的密码。密码的长度必须符合 NET ACCOUNTS</span><br><span class="line">             命令的 &#x2F;MINPWLEN 选项所设置的最小长度。</span><br><span class="line">             最多可以有 14 个字符。</span><br><span class="line">*            生成密码提示。在密码提示下键入密码时，将不会显示密码。</span><br><span class="line">&#x2F;DOMAIN      在当前域的域控制器上执行此操作。</span><br><span class="line">&#x2F;ADD         向用户帐户数据库添加用户帐户。</span><br><span class="line">&#x2F;DELETE      从用户帐户数据库删除用户帐户。</span><br><span class="line"></span><br><span class="line">选项         如下所示:</span><br><span class="line"></span><br><span class="line">   选项                       描述</span><br><span class="line">      --------------------------------------------------------------------</span><br><span class="line">   &#x2F;ACTIVE:&#123;YES | NO&#125;         激活或取消激活帐户。如果该帐户处于非激活状态，</span><br><span class="line">                              用户将无法访问服务器。默认设置为“YES”。</span><br><span class="line">   &#x2F;COMMENT:&quot;text&quot;            提供有关用户帐户的描述性注释。请将文本用引号</span><br><span class="line">                              括起来。</span><br><span class="line">   &#x2F;COUNTRYCODE:nnn           使用操作系统国家&#x2F;地区代码执行指定的语言文件，</span><br><span class="line">                              以显示用户帮助和错误消息。值 0 表示使用默认</span><br><span class="line">                              的国家&#x2F;地区代码。</span><br><span class="line">   &#x2F;EXPIRES:&#123;date | NEVER&#125;    如果设置了日期，可导致帐户过期。</span><br><span class="line">                              NEVER 将帐户设置为无时间限制。</span><br><span class="line">                              过期日期采用格式 mm&#x2F;dd&#x2F;yy(yy)。</span><br><span class="line">                              月份可以是一个数字、完整字母拼写，</span><br><span class="line">                              或使用三个字母的缩写。年份可以使用两位数字</span><br><span class="line">                              或四位数字。使用斜线(&#x2F;)(不留空格)</span><br><span class="line">                              将日期的各个部分隔开。</span><br><span class="line">   &#x2F;FULLNAME:&quot;name&quot;           用户的全名(而不是用户名)。请将该名称用引号</span><br><span class="line">                              括起来。</span><br><span class="line">   &#x2F;HOMEDIR:pathname          用户的主目录设置路径。该路径必须存在。</span><br><span class="line">   &#x2F;PASSWORDCHG:&#123;YES | NO&#125;    指定用户是否可以更改其密码。默认设置</span><br><span class="line">                              为“YES”。</span><br><span class="line">   &#x2F;PASSWORDREQ:&#123;YES | NO&#125;    指定用户帐户是否必须拥有密码。</span><br><span class="line">                              默认设置为“YES”。</span><br><span class="line">   &#x2F;LOGONPASSWORDCHG:&#123;YES|NO&#125; 指定用户是否应在下次登录时更改其密码。</span><br><span class="line">                              默认设置为“NO”。</span><br><span class="line">   &#x2F;PROFILEPATH[:path]        为用户登录配置文件设置路径。</span><br><span class="line">   &#x2F;SCRIPTPATH:pathname       用户登录脚本的位置。</span><br><span class="line">   &#x2F;TIMES:&#123;times | ALL&#125;       登录小时数。TIMES 表示为</span><br><span class="line">                              day[-day][,day[-day]],time[-time][,time</span><br><span class="line">                              [-time]]，增量限制为 1 小时。</span><br><span class="line">                              日期可以是完整拼写，也可以是缩写。</span><br><span class="line">                              小时可以是 12 或 24 小时表示法。对于</span><br><span class="line">                              12 小时表示法，请使用 am、pm、a.m. 或</span><br><span class="line">                              p.m。ALL 表示用户始终可以登录，</span><br><span class="line">                              空白值表示用户始终不能登录。使用逗号将日期和时</span><br><span class="line">                              间隔开，使用分号将多个日期和时间隔开。</span><br><span class="line">   &#x2F;USERCOMMENT:&quot;text&quot;        允许管理员添加或更改帐户的用户注释。</span><br><span class="line">   &#x2F;WORKSTATIONS:&#123;computername[,...] | *&#125;</span><br><span class="line">                              列出用户可用于登录到网络的计算机，最多为八台。</span><br><span class="line">                              如果 &#x2F;WORKSTATIONS 没有列表，或其列表为 *，</span><br><span class="line">                              则用户可以通过任何计算机登录到网络。</span><br><span class="line"></span><br><span class="line">NET HELP 命令 | MORE 显示帮助内容，一次显示一屏。</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><ul>
+<li>.bat文件接受参数使用%num</li>
+<li><code>net user %1 %2 /add</code></li>
+</ul>
+<h3 id="注释符"><a href="#注释符" class="headerlink" title="注释符"></a>注释符</h3><ul>
+<li><code>rem comment</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem program for add new user</span><br><span class="line"></span><br><span class="line">echo %1</span><br><span class="line">echo %2</span><br><span class="line"></span><br><span class="line">rem use: &amp; &#39;.\net user add.bat&#39;  admin 123</span><br><span class="line">net user %1 %2 &#x2F;add</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<h3 id="炫酷命令"><a href="#炫酷命令" class="headerlink" title="炫酷命令"></a>炫酷命令</h3><ul>
+<li>颜色命令 <code>color</code><ul>
+<li><code>color 0a</code></li>
+</ul>
+</li>
+<li>标题命令 <code>title</code><ul>
+<li><code>title &#39;hack&#39;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h3><ul>
+<li><p>date</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理&gt;date &#x2F;T</span><br><span class="line">2020-10-28</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>time</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理&gt;time &#x2F;T</span><br><span class="line">15:57</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><ul>
+<li><p>start</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理&gt;start &#x2F;?</span><br><span class="line">启动一个单独的窗口以运行指定的程序或命令。</span><br><span class="line"></span><br><span class="line">B           启动应用程序，但不创建新窗口。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="调用其他bat文件"><a href="#调用其他bat文件" class="headerlink" title="调用其他bat文件"></a>调用其他bat文件</h3><ul>
+<li><code>call 路径</code></li>
+</ul>
+<p>1.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">echo %1</span><br><span class="line"></span><br><span class="line">call 2.bat %1</span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<p>2.bat</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">net user %1</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理\ch02&gt;1.bat milo</span><br><span class="line">milo</span><br><span class="line">用户名                 Milo</span><br><span class="line">全名</span><br><span class="line">注释</span><br><span class="line">用户的注释</span><br><span class="line">国家&#x2F;地区代码          000 (系统默认值)</span><br><span class="line">帐户启用               Yes</span><br><span class="line">帐户到期               从不</span><br><span class="line"></span><br><span class="line">上次设置密码           2020-08-11 13:13:18</span><br><span class="line">密码到期               从不</span><br><span class="line">密码可更改             2020-08-11 13:13:18</span><br><span class="line">需要密码               No</span><br><span class="line">用户可以更改密码       Yes</span><br><span class="line"></span><br><span class="line">允许的工作站           All</span><br><span class="line">登录脚本</span><br><span class="line">用户配置文件</span><br><span class="line">主目录</span><br><span class="line">上次登录               2020-10-28 15:17:36</span><br></pre></td></tr></table></figure>
+
+<h3 id="任务列表查看"><a href="#任务列表查看" class="headerlink" title="任务列表查看"></a>任务列表查看</h3><ul>
+<li><p><code>tasklist</code>  该工具显示在本地或远程机器上当前运行的进程列表</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">F:\Desktop\批处理\ch02&gt;tasklist &#x2F;FI &quot;PID eq 16108&quot;</span><br><span class="line"></span><br><span class="line">映像名称                       PID 会话名              会话#       内存使用</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D; &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">chrome.exe                   16108 Console                    1     33,912 K</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="任务关闭"><a href="#任务关闭" class="headerlink" title="任务关闭"></a>任务关闭</h3><ul>
+<li><code>taskkill</code>  使用该工具按照进程 ID (PID) 或映像名称终止任务。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">TASKKILL &#x2F;IM notepad.exe</span><br><span class="line">   TASKKILL &#x2F;PID 1230 &#x2F;PID 1241 &#x2F;PID 1253 &#x2F;T</span><br><span class="line">   TASKKILL &#x2F;F &#x2F;IM cmd.exe &#x2F;T</span><br><span class="line">   TASKKILL &#x2F;F &#x2F;FI &quot;PID ge 1000&quot; &#x2F;FI &quot;WINDOWTITLE ne untitle*&quot;</span><br><span class="line">   TASKKILL &#x2F;F &#x2F;FI &quot;USERNAME eq NT AUTHORITY\SYSTEM&quot; &#x2F;IM notepad.exe</span><br><span class="line">   TASKKILL &#x2F;S system &#x2F;U 域\用户名 &#x2F;FI &quot;用户名 ne NT*&quot; &#x2F;IM *</span><br><span class="line">   TASKKILL &#x2F;S system &#x2F;U username &#x2F;P password &#x2F;FI &quot;IMAGENAME eq note*&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件夹结构查看"><a href="#文件夹结构查看" class="headerlink" title="文件夹结构查看"></a>文件夹结构查看</h3><ul>
+<li><p><code>tree</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">以图形显示驱动器或路径的文件夹结构。</span><br><span class="line"></span><br><span class="line">TREE [drive:][path] [&#x2F;F] [&#x2F;A]</span><br><span class="line"></span><br><span class="line">   &#x2F;F   显示每个文件夹中文件的名称。</span><br><span class="line">   &#x2F;A   使用 ASCII 字符，而不使用扩展字符。</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;tree &#x2F;A</span><br><span class="line">卷 办公 的文件夹 PATH 列表</span><br><span class="line">卷序列号为 A081-59AB</span><br><span class="line">F:.</span><br><span class="line">+---ch01</span><br><span class="line">\---ch02</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;tree &#x2F;A &#x2F;F</span><br><span class="line">卷 办公 的文件夹 PATH 列表</span><br><span class="line">卷序列号为 A081-59AB</span><br><span class="line">F:.</span><br><span class="line">|   批处理脚本.md</span><br><span class="line">|</span><br><span class="line">+---ch01</span><br><span class="line">|       1.txt</span><br><span class="line">|       2.txt</span><br><span class="line">|</span><br><span class="line">\---ch02</span><br><span class="line">        1.bat</span><br><span class="line">        2.bat</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="关机"><a href="#关机" class="headerlink" title="关机"></a>关机</h3><ul>
+<li><p><code>shutdown</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;i         显示图形用户界面(GUI)。这必须是第一个选项。 远程关闭</span><br><span class="line"> &#x2F;l         注销。这不能与 &#x2F;m 或 &#x2F;d 选项一起使用。</span><br><span class="line"> &#x2F;s         关闭计算机。</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="计划任务"><a href="#计划任务" class="headerlink" title="计划任务"></a>计划任务</h3><ul>
+<li><code>at</code>  命令安排在特定日期和时间运行命令和程序。<ul>
+<li>AT 命令已弃用。请改用 schtasks.exe。</li>
+</ul>
+</li>
+</ul>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><ul>
+<li><p><code>set</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">显示、设置或删除 cmd.exe 环境变量。</span><br><span class="line"></span><br><span class="line">SET [variable&#x3D;[string]]</span><br><span class="line"></span><br><span class="line">  variable  指定环境变量名。</span><br><span class="line">  string    指定要指派给变量的一系列字符串。</span><br><span class="line"></span><br><span class="line">要显示当前环境变量，键入不带参数的 SET。</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;echo %OS%</span><br><span class="line">Windows_NT</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h2 id="文件夹或文件相关命令"><a href="#文件夹或文件相关命令" class="headerlink" title="文件夹或文件相关命令"></a>文件夹或文件相关命令</h2><p>默认不显示隐藏目录</p>
+<h3 id="目录显示"><a href="#目录显示" class="headerlink" title="目录显示"></a>目录显示</h3><ul>
+<li><code>dir</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">DIR [drive:][path][filename] [&#x2F;A[[:]attributes]] [&#x2F;B] [&#x2F;C] [&#x2F;D] [&#x2F;L] [&#x2F;N]</span><br><span class="line">  [&#x2F;O[[:]sortorder]] [&#x2F;P] [&#x2F;Q] [&#x2F;R] [&#x2F;S] [&#x2F;T[[:]timefield]] [&#x2F;W] [&#x2F;X] [&#x2F;4]</span><br><span class="line"></span><br><span class="line">  [drive:][path][filename]</span><br><span class="line">              指定要列出的驱动器、目录和&#x2F;或文件。</span><br><span class="line"></span><br><span class="line">  &#x2F;A          显示具有指定属性的文件。</span><br><span class="line">  属性         D  目录                R  只读文件</span><br><span class="line">               H  隐藏文件            A  准备存档的文件</span><br><span class="line">               S  系统文件            I  无内容索引文件</span><br><span class="line">               L  重新分析点          O  脱机文件</span><br></pre></td></tr></table></figure>
+
+<h3 id="目录创建"><a href="#目录创建" class="headerlink" title="目录创建"></a>目录创建</h3><ul>
+<li><code>mkdir</code> –&gt; <code>md</code></li>
+</ul>
+<h3 id="目录删除"><a href="#目录删除" class="headerlink" title="目录删除"></a>目录删除</h3><ul>
+<li><code>rmdir</code> –&gt; <code>rd</code></li>
+</ul>
+<h3 id="目录切换"><a href="#目录切换" class="headerlink" title="目录切换"></a>目录切换</h3><ul>
+<li><code>cd</code></li>
+</ul>
+<h3 id="目录重命名"><a href="#目录重命名" class="headerlink" title="目录重命名"></a>目录重命名</h3><ul>
+<li><code>rename</code> – &gt; <code>ren</code></li>
+</ul>
+<h3 id="目录复制"><a href="#目录复制" class="headerlink" title="目录复制"></a>目录复制</h3><ul>
+<li><code>copy</code></li>
+</ul>
+<h3 id="文件删除"><a href="#文件删除" class="headerlink" title="文件删除"></a>文件删除</h3><ul>
+<li><p><code>del</code></p>
+<p><code>del c:\1\*.txt</code></p>
+</li>
+</ul>
+<h3 id="文件剪切"><a href="#文件剪切" class="headerlink" title="文件剪切"></a>文件剪切</h3><ul>
+<li><code>move</code></li>
+</ul>
+<h2 id="网络相关命令"><a href="#网络相关命令" class="headerlink" title="网络相关命令"></a>网络相关命令</h2><h3 id="用户操作"><a href="#用户操作" class="headerlink" title="用户操作"></a>用户操作</h3><ul>
+<li><code>net user</code>  查看用户</li>
+<li><code>net user 用户名</code>  查看用户详细信息</li>
+<li><code>net user 用户名 密码 /add</code></li>
+<li><code>net user 用户名 /delete</code></li>
+</ul>
+<h3 id="用户组操作"><a href="#用户组操作" class="headerlink" title="用户组操作"></a>用户组操作</h3><ul>
+<li><code>net localgroup</code> 查看用户组</li>
+<li><code>net localgroup administratiors 用户名 /add</code>  将用户添加到administratiors 用户组</li>
+<li><code>net localgroup users 用户名 /delete</code> 将用户从users用户组删除</li>
+</ul>
+<h3 id="网络联通测试"><a href="#网络联通测试" class="headerlink" title="网络联通测试"></a>网络联通测试</h3><ul>
+<li><p><code>ping</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">目的dao就是检测本机的回du路是否正常，如果正zhi常，则说明本机的TCP&#x2F;IP协议安装正常</span><br><span class="line"></span><br><span class="line">F:\Desktop\批处理&gt;ping 127.0.0.1</span><br><span class="line"></span><br><span class="line">正在 Ping 127.0.0.1 具有 32 字节的数据:</span><br><span class="line">来自 127.0.0.1 的回复: 字节&#x3D;32 时间&lt;1ms TTL&#x3D;128</span><br><span class="line">来自 127.0.0.1 的回复: 字节&#x3D;32 时间&lt;1ms TTL&#x3D;128</span><br><span class="line">来自 127.0.0.1 的回复: 字节&#x3D;32 时间&lt;1ms TTL&#x3D;128</span><br><span class="line">来自 127.0.0.1 的回复: 字节&#x3D;32 时间&lt;1ms TTL&#x3D;128</span><br><span class="line"></span><br><span class="line">127.0.0.1 的 Ping 统计信息:</span><br><span class="line">    数据包: 已发送 &#x3D; 4，已接收 &#x3D; 4，丢失 &#x3D; 0 (0% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">    最短 &#x3D; 0ms，最长 &#x3D; 0ms，平均 &#x3D; 0ms</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<h3 id="网络链接"><a href="#网络链接" class="headerlink" title="网络链接"></a>网络链接</h3><ul>
+<li><code>telnet</code>  已启用</li>
+</ul>
+<h3 id="路由信息查看"><a href="#路由信息查看" class="headerlink" title="路由信息查看"></a>路由信息查看</h3><ul>
+<li><code>tracert</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\Milo&gt;tracert www.baidu.com</span><br><span class="line"></span><br><span class="line">通过最多 30 个跃点跟踪</span><br><span class="line">到 www.a.shifen.com [180.101.49.12] 的路由:</span><br><span class="line"></span><br><span class="line">  1     3 ms     4 ms     2 ms  192.168.10.1</span><br><span class="line">  2     2 ms     2 ms     2 ms  192.168.72.1</span><br><span class="line">  3     7 ms     5 ms     7 ms  124.74.48.46</span><br><span class="line">  4    39 ms     6 ms     7 ms  124.74.48.41</span><br><span class="line">  5     7 ms    12 ms    14 ms  101.95.41.201</span><br><span class="line">  6    12 ms     8 ms    12 ms  61.152.25.66</span><br><span class="line">  7    27 ms    40 ms    18 ms  202.97.74.146</span><br><span class="line">  8    22 ms     *       12 ms  58.213.94.114</span><br><span class="line">  9     *       14 ms     *     58.213.94.86</span><br><span class="line"> 10    17 ms    17 ms    15 ms  58.213.96.90</span><br><span class="line"> 11     *        *        *     请求超时。</span><br><span class="line"> 12     *        *        *     请求超时。</span><br><span class="line"> 13     *        *        *     请求超时。</span><br><span class="line"> 14     *        *        *     请求超时。</span><br><span class="line"> 15    48 ms    11 ms    11 ms  180.101.49.12</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络适配器"><a href="#网络适配器" class="headerlink" title="网络适配器"></a>网络适配器</h3><ul>
+<li><code>ipconfig</code></li>
+</ul>
+<h3 id="ARP信息"><a href="#ARP信息" class="headerlink" title="ARP信息"></a>ARP信息</h3><ul>
+<li><code>arp</code> 显示和修改地址解析协议(ARP)使用的“IP 到物理”地址转换表。</li>
+</ul>
+<h2 id="条件判断结构"><a href="#条件判断结构" class="headerlink" title="条件判断结构"></a>条件判断结构</h2><p>文件路径中不能有中文</p>
+<h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem 演示if-else 结构 判断字符串是否为规定的字符串</span><br><span class="line"></span><br><span class="line">rem v &#x3D;&#x3D; hello wrong,不能有空格</span><br><span class="line">set v&#x3D;hello </span><br><span class="line"></span><br><span class="line">if %v%&#x3D;&#x3D;hello (echo ok) else (echo no)</span><br><span class="line"></span><br><span class="line">pause&gt;nul</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件是否存在"><a href="#文件是否存在" class="headerlink" title="文件是否存在"></a>文件是否存在</h3><ul>
+<li><code>exist</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">rem 程序用来判断当前1.bat是否存在</span><br><span class="line">rem 文件路径中不能有中文</span><br><span class="line">if exist F:\Desktop\批处理\ch03\12.bat (echo ok) else (echo no)</span><br><span class="line"></span><br><span class="line">pause&gt;nul</span><br></pre></td></tr></table></figure>
+
+<h3 id="文件判断删除"><a href="#文件判断删除" class="headerlink" title="文件判断删除"></a>文件判断删除</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">if exist F:\Desktop\a.txt (</span><br><span class="line">	echo file is find!</span><br><span class="line">	del F:\Desktop\a.txt</span><br><span class="line">) else (</span><br><span class="line">	echo file is not find</span><br><span class="line">)</span><br><span class="line">pause&gt;nul</span><br></pre></td></tr></table></figure>
+
+<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2><h3 id="遍历目录"><a href="#遍历目录" class="headerlink" title="遍历目录"></a>遍历目录</h3><ul>
+<li><p><code>for /d %%名称 in(路径/*) do 具体操作</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem for test</span><br><span class="line"></span><br><span class="line">for &#x2F;d %%a in (F:\Desktop\*) do if %%a&#x3D;&#x3D;test rd %%a</span><br><span class="line"></span><br><span class="line">for &#x2F;d %%a in (F:\Desktop\*) do echo %%a</span><br><span class="line"></span><br><span class="line">pause&gt;nul</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="遍历删除文件"><a href="#遍历删除文件" class="headerlink" title="遍历删除文件"></a>遍历删除文件</h3><ul>
+<li><p><code>for /r &quot;目录路径&quot; %%v in (匹配规则 例如*.py) do 执行操作 %%v</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">rem for test</span><br><span class="line"></span><br><span class="line">for &#x2F;r &quot;F:\Desktop&quot; %%v in (*.test) do echo %%v</span><br><span class="line"></span><br><span class="line">echo delete all *.py</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">for &#x2F;r &quot;F:\Desktop&quot; %%v in (*.test) do del %%v</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">pause&gt;nul</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="遍历数字"><a href="#遍历数字" class="headerlink" title="遍历数字"></a>遍历数字</h3><ul>
+<li><p><code>for /L %%v in (start,step,end) do 具体操作</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">for &#x2F;L %%v in (1,1,20) do ping %1.%%v</span><br><span class="line"></span><br><span class="line">pause</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="遍历文件内容"><a href="#遍历文件内容" class="headerlink" title="遍历文件内容"></a>遍历文件内容</h3><ul>
+<li><code>for /F %%v in (文件名) do 具体操作</code></li>
+</ul>
+<h3 id="目录重复新建"><a href="#目录重复新建" class="headerlink" title="目录重复新建"></a>目录重复新建</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">cd cd F:\Desktop</span><br><span class="line"></span><br><span class="line">:loop</span><br><span class="line">md Virus</span><br><span class="line">cd Virus</span><br><span class="line">goto loop</span><br><span class="line"></span><br><span class="line">pause&gt;nul</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h2 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h2><h3 id="交互操作"><a href="#交互操作" class="headerlink" title="交互操作"></a>交互操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line"></span><br><span class="line">echo 1.a</span><br><span class="line">echo 2.b</span><br><span class="line">echo 3.c</span><br><span class="line">echo 4.d</span><br><span class="line"></span><br><span class="line">:first</span><br><span class="line">echo Enter you option:</span><br><span class="line">rem 设置变量，使用opt接受用户的输入</span><br><span class="line">set &#x2F;p opt&#x3D;</span><br><span class="line">if %opt%&#x3D;&#x3D;1 goto one</span><br><span class="line">if %opt%&#x3D;&#x3D;2 goto two</span><br><span class="line">if %opt%&#x3D;&#x3D;3 goto three</span><br><span class="line">if %opt%&#x3D;&#x3D;4 goto four</span><br><span class="line">echo Invalid option</span><br><span class="line">goto first</span><br><span class="line"></span><br><span class="line">:one</span><br><span class="line">echo your choose one</span><br><span class="line">pause&gt;nul</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">:two</span><br><span class="line">echo your choose teo</span><br><span class="line">pause&gt;nul</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line">:three</span><br><span class="line">echo your choose three</span><br><span class="line">pause&gt;nul</span><br><span class="line">exit</span><br><span class="line"></span><br><span class="line">:four</span><br><span class="line">echo your choose four</span><br><span class="line">pause&gt;nul</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bat转EXE程序"><a href="#Bat转EXE程序" class="headerlink" title="Bat转EXE程序"></a>Bat转EXE程序</h3><p>Bat to Exe Converter</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/25/%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" rel="prev" title="执行顺序">
+                  <i class="fa fa-chevron-left"></i> 执行顺序
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Milo Ye</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
